@@ -2,6 +2,19 @@
 // Connect to DB
 include './DB/dbConnection.php';
 
+//Delete row from comments
+try {
+    if (isset($_GET['commentId'])) {
+        $idComment = $_GET['commentId'];
+        $deleteRow = "DELETE FROM comments WHERE comment_id=$idComment";
+        $dbConnection->exec($deleteRow);
+
+        header("Refresh:0; url=moviedetail.php");
+    }
+} catch (PDOException $exception) {
+    echo $deleteRow . "\n" . $exception->getMessage();
+}
+
 //Retrieve movie details from DB
 $movieId = 1;
 $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name 
@@ -54,17 +67,20 @@ if (isset($_POST['comment'])) {
             <div class="col-8">
                 <h3><?php echo ($data['film_title']) ?></h3>
                 <article>
-                    <p>Year: <?php echo ($yearReleased) ?></p>
-                    <p>Genre: <?php echo ($categoryName) ?></p>
                     <p>Synopsis: <?php echo ($description) ?></p>
+                    <br><br>
+                    <p>Genre: <?php echo ($categoryName) ?></p>
+                    <p>Year: <?php echo ($yearReleased) ?></p>
                 </article>
             </div>
             <div class="col-4">
                 <img src="./academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid">
             </div>
+            <div class="col-3 offset-9">
+                <a class="btn btn-info" href="https://www.youtube.com/watch?v=P10p7ALXkcU&ab_channel=Cocomelon-NurseryRhymes" role="button">Watch the trailer</a>
+            </div>
 
         </div>
-
 
 
         <form action="" method="post">
@@ -82,25 +98,29 @@ if (isset($_POST['comment'])) {
                     <th>Name</th>
                     <th>Comment</th>
                     <th>Delete</th>
-                    <!-- <th>Delete</th> -->
                 </tr>
             </thead>
 
             <?php
             //Retrieve last messages
-            $responseMessages = $dbConnection->query('SELECT comment_id, comment, created_at FROM comments ORDER BY created_at DESC LIMIT 0, 10');
+            $responseMessages = $dbConnection->query('SELECT comment_id, comment, created_at, users.first_name
+            FROM comments as comments 
+            JOIN users as users ON users.id = comments.user_id
+            ORDER BY created_at DESC LIMIT 0, 10');
 
             while ($data = $responseMessages->fetch()) {
                 $comment = $data['comment'];
                 $date = $data['created_at'];
+                $name = $data['first_name'];
+                $commentId = $data['comment_id'];
             ?>
                 <tbody>
                     <tr>
                         <td> <?php echo ($date) ?></td>
-                        <td> Adriana </td>
+                        <td> <?php echo ($name) ?> </td>
                         <td> <?php echo ($comment) ?></td>
                         <td>
-                            <a href="moviedetail.php?id=<?php echo ($data['comment_id']) ?>">
+                            <a href="moviedetail.php?commentId=<?php echo ($commentId) ?>">
                                 <i class='fa fa-trash'></i>
                             </a>
                         </td>
