@@ -8,15 +8,17 @@ The objective of this project is to let the group practice what they've learned 
 [https://github.com/becodeorg/BXL-Swartz-4-27/blob/master/2.The-Hill/2.PHP/GetflixProject.md](https://github.com/becodeorg/BXL-Swartz-4-27/blob/master/2.The-Hill/2.PHP/GetflixProject.md)
 
 ## Language Used
-- HTML
-- CSS
+- HTML5
+- CSS3 and Bootstrap 4
 - Javascript
 - PHP
 - SQL
 
-## Mockups - coming soon
+## Prototype
+[https://www.figma.com/proto/jNtUTjTA6k9PBolBH78XYj/Getflix?node-id=23%3A4&scaling=scale-down&page-id=0%3A1](https://www.figma.com/proto/jNtUTjTA6k9PBolBH78XYj/Getflix?node-id=23%3A4&scaling=scale-down&page-id=0%3A1)
 
-## Database Diagrams - coming soon
+## Database Diagram
+![Getflix Database Diagram](documentation/getflix_database_diagram.png)
 
 ## Contributors
 - [Adriana Lazurca](https://github.com/adriana-lazurca)
@@ -26,6 +28,16 @@ The objective of this project is to let the group practice what they've learned 
 - [Mehmet Ugurlu](https://github.com/mugurlu0)
 
 ## Credits
-- Photos:
-- Icons:
-- Fonts:
+#### **Website Inspiration**
+- [Prime Video](https://www.primevideo.com/)
+- [Netflix](https://www.netflix.com/be-en/)
+  
+#### **Images**
+
+#### **Icons**
+
+#### **Fonts**
+
+#### **Tools**
+  - [Figma](https://www.figma.com/) for the Prototype
+  - [MySQL Workbench](https://www.mysql.com/products/workbench/) for the Database Diagram
