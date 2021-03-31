@@ -16,20 +16,36 @@ try {
 }
 
 //Retrieve movie details from DB
-$movieId = 1;
-$responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name 
+
+if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
+    echo "<p><strong>MOVIE NOT FOUND</strong></p>";
+    return;
+}
+
+try {
+    $movieId = $_GET['movieId'];
+    $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name 
 FROM film  as film
 JOIN film_category as filmcategory ON film.film_id = filmcategory.film_id
 JOIN category as category ON filmcategory.category_id = category.category_id
 WHERE film.film_id = $movieId");
-//get row
-$data = $responseMovies->fetch();
-//get data
-$yearReleased = $data['year_released'];
-$categoryName = $data['category_name'];
-$description = $data['description'];
+    //get row
+    $data = $responseMovies->fetch();
+    if ($data == false) {
+        echo "<p><strong>MOVIE NOT FOUND</strong></p>";
+        return;
+    }
 
-$responseMovies->closeCursor();
+    //get data
+    $yearReleased = $data['year_released'];
+    $categoryName = $data['category_name'];
+    $description = $data['description'];
+
+    $responseMovies->closeCursor();
+} catch (PDOException $exception) {
+    echo $exception->getMessage();
+}
+
 
 //MESSAGES
 //verify variables are not empty
@@ -69,6 +85,7 @@ if (isset($_POST['comment'])) {
                 <article>
                     <p>Synopsis: <?php echo ($description) ?></p>
                     <br><br>
+
                     <p>Genre: <?php echo ($categoryName) ?></p>
                     <p>Year: <?php echo ($yearReleased) ?></p>
                 </article>
@@ -82,7 +99,8 @@ if (isset($_POST['comment'])) {
 
         </div>
 
-
+        <br><br>
+        <hr>
         <form action="" method="post">
             <p><label for="comment">Comments:</label></p>
             <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
@@ -120,7 +138,7 @@ if (isset($_POST['comment'])) {
                         <td> <?php echo ($name) ?> </td>
                         <td> <?php echo ($comment) ?></td>
                         <td>
-                            <a href="moviedetail.php?commentId=<?php echo ($commentId) ?>">
+                            <a href="moviedetail.php?commentId=<?php echo $commentId ?>">
                                 <i class='fa fa-trash'></i>
                             </a>
                         </td>
