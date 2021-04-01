@@ -2,6 +2,13 @@
 // Connect to DB
 include './DB/dbConnection.php';
 
+if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
+    echo "<p><strong>MOVIE NOT FOUND</strong></p>";
+    return;
+}
+
+$movieId = $_GET['movieId'];
+
 //Delete row from comments
 try {
     if (isset($_GET['commentId'])) {
@@ -9,7 +16,7 @@ try {
         $deleteRow = "DELETE FROM comments WHERE comment_id=$idComment";
         $dbConnection->exec($deleteRow);
 
-        header("Refresh:0; url=moviedetail.php");
+        header("Refresh:0; url=moviedetail.php?movieId=$movieId");
     }
 } catch (PDOException $exception) {
     echo $deleteRow . "\n" . $exception->getMessage();
@@ -17,13 +24,7 @@ try {
 
 //Retrieve movie details from DB
 
-if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
-    echo "<p><strong>MOVIE NOT FOUND</strong></p>";
-    return;
-}
-
 try {
-    $movieId = $_GET['movieId'];
     $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name 
 FROM film  as film
 JOIN film_category as filmcategory ON film.film_id = filmcategory.film_id
@@ -60,7 +61,7 @@ if (isset($_POST['comment'])) {
     } catch (PDOException $exception) {
         echo $exception->getMessage();
     }
-    header("Refresh:0; url=moviedetail.php");
+    header("Refresh:0; url=moviedetail.php?movieId=$movieId");
 }
 ?>
 
@@ -103,7 +104,7 @@ if (isset($_POST['comment'])) {
         <hr>
         <form action="" method="post">
             <p><label for="comment">Comments:</label></p>
-            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
+            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment" required></textarea>
             <br><br>
             <input type="submit" value="Submit">
         </form>
@@ -138,7 +139,7 @@ if (isset($_POST['comment'])) {
                         <td> <?php echo ($name) ?> </td>
                         <td> <?php echo ($comment) ?></td>
                         <td>
-                            <a href="moviedetail.php?commentId=<?php echo $commentId ?>">
+                            <a href="moviedetail.php?movieId=<?php echo$movieId?>&commentId=<?php echo $commentId ?>">
                                 <i class='fa fa-trash'></i>
                             </a>
                         </td>
