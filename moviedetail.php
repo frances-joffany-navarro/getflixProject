@@ -54,7 +54,7 @@ if (isset($_POST['comment'])) {
     // INSERT DATA IN DB
     $comment = $_POST['comment'];
     $userId = 1; //todo: replace with session user
-    $insertSql = "INSERT INTO comments (`comment`, `user_id`) VALUES('$comment', $userId)";
+    $insertSql = "INSERT INTO comments (`comment`, `user_id`,`film_id` ) VALUES('$comment', $userId, $movieId)";
 
     try {
         $result = $dbConnection->exec($insertSql);
@@ -122,10 +122,11 @@ if (isset($_POST['comment'])) {
 
             <?php
             //Retrieve last messages
-            $responseMessages = $dbConnection->query('SELECT comment_id, comment, created_at, users.first_name
+            $responseMessages = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, users.first_name
             FROM comments as comments 
             JOIN users as users ON users.id = comments.user_id
-            ORDER BY created_at DESC LIMIT 0, 10');
+            WHERE comments.film_id=$movieId
+            ORDER BY created_at DESC LIMIT 0, 10");
 
             while ($data = $responseMessages->fetch()) {
                 $comment = $data['comment'];
