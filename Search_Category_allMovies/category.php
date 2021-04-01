@@ -25,12 +25,12 @@
 
   <?php
   //movies categorised and displayed
-$sql = "select film.film_title, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id";
+$sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id";
     $answer = $conn->query($sql);
     while($row = $answer->fetch(PDO::FETCH_OBJ)){
         echo "<li>
         <div><figure>
-        <a href=http://localhost/Search/moviedetail.php?>
+        <a href=moviedetail.php?movieId=".$row->film_id.">
         <img src='sample.jpg' alt=$row->film_title>
         </a>
         <figcaption>".$row->film_title."</figcaption>
