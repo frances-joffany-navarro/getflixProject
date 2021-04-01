@@ -27,9 +27,9 @@
 
 
                 <div class="text-center">
-                        <h1 class="p-5">Bonjour <?php echo $_SESSION['user']; ?> !</h1>
+                        <h1 class="p-5">Hello <?php echo $_SESSION['user']; ?> !</h1>
                         <hr />
-                        <a href="deconnexion.php" class="btn btn-danger btn-lg">Déconnexion</a>
+                        <a href="deconnexion.php" class="btn btn-danger btn-lg">Sign out</a>
         
                 </div>
             </div>

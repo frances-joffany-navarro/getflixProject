@@ -83,6 +83,7 @@ if (isset($_POST['comment'])) {
         <div class="row" ;>
             <div class="col-8">
                 <h3><?php echo ($data['film_title']) ?></h3>
+
                 <article>
                     <p>Synopsis: <?php echo ($description) ?></p>
                     <br><br>
@@ -140,7 +141,7 @@ if (isset($_POST['comment'])) {
                         <td> <?php echo ($name) ?> </td>
                         <td> <?php echo ($comment) ?></td>
                         <td>
-                            <a href="moviedetail.php?movieId=<?php echo$movieId?>&commentId=<?php echo $commentId ?>">
+                            <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
                                 <i class='fa fa-trash'></i>
                             </a>
                         </td>
