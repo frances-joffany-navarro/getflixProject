@@ -3,8 +3,6 @@
 include './DB/dbConnection.php';
 include './user.php';
 
-session_start();
-
 if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
     echo "<p><strong>MOVIE NOT FOUND</strong></p>";
     return;
