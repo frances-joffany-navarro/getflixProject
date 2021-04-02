@@ -1,6 +1,9 @@
 <?php
 // Connect to DB
 include './DB/dbConnection.php';
+include './user.php';
+
+session_start();
 
 if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
     echo "<p><strong>MOVIE NOT FOUND</strong></p>";
@@ -8,6 +11,7 @@ if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
 }
 
 $movieId = $_GET['movieId'];
+// $user = $_SESSION['user'];
 
 //Delete row from comments
 try {
@@ -53,7 +57,7 @@ WHERE film.film_id = $movieId");
 if (isset($_POST['comment'])) {
     // INSERT DATA IN DB
     $comment = $_POST['comment'];
-    $userId = 1; //todo: replace with session user
+    $userId = 1;
     $insertSql = "INSERT INTO comments (`comment`, `user_id`,`film_id` ) VALUES('$comment', $userId, $movieId)";
 
     try {
@@ -93,7 +97,7 @@ if (isset($_POST['comment'])) {
                 </article>
             </div>
             <div class="col-4">
-                <img src="./academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid">
+                <img src="./images/academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid">
             </div>
             <div class="col-3 offset-9">
                 <a class="btn btn-info" href="https://www.youtube.com/watch?v=P10p7ALXkcU&ab_channel=Cocomelon-NurseryRhymes" role="button">Watch the trailer</a>
