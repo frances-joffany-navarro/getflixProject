@@ -7,8 +7,8 @@
 
             <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="indexBis.css">
-            <title>Connexion</title>
+            <link rel="stylesheet" href="./css/indexBis.css">
+            <title>Login</title>
         </head>
         <body>
         
@@ -26,7 +26,7 @@
                         case 'password':
                         ?>
                             <div class="alert alert-danger">
-                                <strong>Erreur</strong> mot de passe incorrect
+                                <strong>Error</strong> incorrect password
                             </div>
                         <?php
                         break;
@@ -34,7 +34,7 @@
                         case 'email':
                         ?>
                             <div class="alert alert-danger">
-                                <strong>Erreur</strong> email incorrect
+                                <strong>Error</strong> incorrect email
                             </div>
                         <?php
                         break;
@@ -42,7 +42,7 @@
                         case 'already':
                         ?>
                             <div class="alert alert-danger">
-                                <strong>Erreur</strong> compte non existant
+                                <strong>Error</strong> account doesn't exist
                             </div>
                         <?php
                         break;
@@ -51,18 +51,18 @@
                 ?> 
             
             <form action="connexion.php" method="post">
-                <h2 class="text-center">Connexion</h2>       
+                <h2 class="text-center">Log in</h2>       
                 <div class="form-group">
                     <input type="email" name="email" class="form-control" placeholder="Email" required="required" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Mot de passe" required="required" autocomplete="off">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="required" autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                 </div>   
             </form>
-            <p class="text-center"><a href="inscription.php">Inscription</a></p>
+            <p class="text-center"><a href="inscription.php">Register</a></p>
         </div>
         </body>
 </html>

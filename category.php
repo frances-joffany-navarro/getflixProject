@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
-    <link rel="stylesheet" href="styleSearchFilter.css">
+    <link rel="stylesheet" href="./css/styleSearchFilter.css">
 </head>
 <body>
 <input type="text" id="myInput" placeholder="Search for movie titles..">
@@ -41,6 +41,6 @@ $sql = "select film.film_title, film.film_id, film.description, film.year_releas
   </li>";}?>
 </ul>
 
-    <script src="scriptSearchFilter.js"></script>
+    <script src="./js/scriptSearchFilter.js"></script>
 </body>
 </html>

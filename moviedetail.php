@@ -1,6 +1,15 @@
 <?php
 // Connect to DB
 include './DB/dbConnection.php';
+include './user.php';
+
+if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
+    echo "<p><strong>MOVIE NOT FOUND</strong></p>";
+    return;
+}
+
+$movieId = $_GET['movieId'];
+// $user = $_SESSION['user'];
 
 //Delete row from comments
 try {
@@ -9,7 +18,7 @@ try {
         $deleteRow = "DELETE FROM comments WHERE comment_id=$idComment";
         $dbConnection->exec($deleteRow);
 
-        header("Refresh:0; url=moviedetail.php");
+        header("Refresh:0; url=moviedetail.php?movieId=$movieId");
     }
 } catch (PDOException $exception) {
     echo $deleteRow . "\n" . $exception->getMessage();
@@ -17,13 +26,7 @@ try {
 
 //Retrieve movie details from DB
 
-if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
-    echo "<p><strong>MOVIE NOT FOUND</strong></p>";
-    return;
-}
-
 try {
-    $movieId = $_GET['movieId'];
     $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name 
 FROM film  as film
 JOIN film_category as filmcategory ON film.film_id = filmcategory.film_id
@@ -52,15 +55,15 @@ WHERE film.film_id = $movieId");
 if (isset($_POST['comment'])) {
     // INSERT DATA IN DB
     $comment = $_POST['comment'];
-    $userId = 1; //todo: replace with session user
-    $insertSql = "INSERT INTO comments (`comment`, `user_id`) VALUES('$comment', $userId)";
+    $userId = 1;
+    $insertSql = "INSERT INTO comments (`comment`, `user_id`,`film_id` ) VALUES('$comment', $userId, $movieId)";
 
     try {
         $result = $dbConnection->exec($insertSql);
     } catch (PDOException $exception) {
         echo $exception->getMessage();
     }
-    header("Refresh:0; url=moviedetail.php");
+    header("Refresh:0; url=moviedetail.php?movieId=$movieId");
 }
 ?>
 
@@ -82,6 +85,7 @@ if (isset($_POST['comment'])) {
         <div class="row" ;>
             <div class="col-8">
                 <h3><?php echo ($data['film_title']) ?></h3>
+
                 <article>
                     <p>Synopsis: <?php echo ($description) ?></p>
                     <br><br>
@@ -91,7 +95,7 @@ if (isset($_POST['comment'])) {
                 </article>
             </div>
             <div class="col-4">
-                <img src="./academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid">
+                <img src="./images/academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid">
             </div>
             <div class="col-3 offset-9">
                 <a class="btn btn-info" href="https://www.youtube.com/watch?v=P10p7ALXkcU&ab_channel=Cocomelon-NurseryRhymes" role="button">Watch the trailer</a>
@@ -103,7 +107,7 @@ if (isset($_POST['comment'])) {
         <hr>
         <form action="" method="post">
             <p><label for="comment">Comments:</label></p>
-            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
+            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment" required></textarea>
             <br><br>
             <input type="submit" value="Submit">
         </form>
@@ -121,10 +125,11 @@ if (isset($_POST['comment'])) {
 
             <?php
             //Retrieve last messages
-            $responseMessages = $dbConnection->query('SELECT comment_id, comment, created_at, users.first_name
+            $responseMessages = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, users.first_name
             FROM comments as comments 
             JOIN users as users ON users.id = comments.user_id
-            ORDER BY created_at DESC LIMIT 0, 10');
+            WHERE comments.film_id=$movieId
+            ORDER BY created_at DESC LIMIT 0, 10");
 
             while ($data = $responseMessages->fetch()) {
                 $comment = $data['comment'];
@@ -138,7 +143,7 @@ if (isset($_POST['comment'])) {
                         <td> <?php echo ($name) ?> </td>
                         <td> <?php echo ($comment) ?></td>
                         <td>
-                            <a href="moviedetail.php?commentId=<?php echo $commentId ?>">
+                            <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
                                 <i class='fa fa-trash'></i>
                             </a>
                         </td>

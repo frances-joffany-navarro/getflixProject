@@ -54,20 +54,12 @@ a {
   }
   
 /*-----------------------------------------------------------Category titles---------------------------*/
-#btnViewMore {
-  display:inline-block;
-  text-decoration: none;
-  width:100px;
-  height: 20px;
-  font-size: 20px;
-  text-align: center ;
-  line-height: 60px;
-}
+
 /*-----------------------------------------------------------GRID Disposition---------------------------*/
 .container {
   display: grid;
   grid-template-columns: 100px 100px 100px 100px;
-  grid-template-rows: 150px 150px 150px 150px;
+  grid-template-rows: 200px 50px 150px 150px 150px 150px;
   margin-top: 5%;
 	/*border: 1px solid rgb(255, 252, 252);-*/
   border-color: antiquewhite;
@@ -77,17 +69,87 @@ a {
   margin-right: 3%;
 }
 /*--------------Row 1 -------*/
-#movie1Row1 {
-  grid-column: 1;
+#wideBanner {
+  grid-column: span 4;
+  grid-row: 1 ;
 }
-#movie2Row1 {
-  grid-column: 2;
-}
-#movie3Row1 {
-  grid-column: 3;
-}
-#movie4Row1 {
+#btnViewMore {
+  grid-row: 2;
   grid-column: 4;
+}
+
+/*--------------Row 3 -------*/
+#movie1Row3 {
+  grid-column: 1;
+  grid-row: 3;
+}
+#movie2Row3 {
+  grid-column: 2;
+  grid-row: 3;
+}
+#movie3Row3 {
+  grid-column: 3;
+  grid-row: 3;
+}
+#movie4Row3 {
+  grid-column: 4;
+  grid-row: 3;
+}
+/*---------------ROW 4-----------*/
+#movie1Row4 {
+  grid-column: 1;
+  grid-row: 4;
+}
+#movie2Row4 {
+  grid-column: 2;
+  grid-row: 4;
+}
+#movie3Row4 {
+  grid-column: 3;
+  grid-row: 4;
+}
+#movie4Row4 {
+  grid-column: 4;
+  grid-row: 4;
+}
+/*---------------ROW 5-----------*/
+#movie1Row5 {
+  grid-column: 1;
+  grid-row: 5;
+}
+#movie2Row5 {
+  grid-column: 2;
+  grid-row: 5;
+}
+#movie3Row5 {
+  grid-column: 3;
+  grid-row: 5;
+}
+#movie4Row5 {
+  grid-column: 4;
+  grid-row: 5;
+}
+/*---------------ROW 6-----------*/
+#movie1Row6 {
+  grid-column: 1;
+  grid-row: 6;
+}
+#movie2Row6 {
+  grid-column: 2;
+  grid-row: 6;
+}
+#movie3Row6 {
+  grid-column: 3;
+  grid-row: 6;
+}
+#movie4Row6 {
+  grid-column: 4;
+  grid-row: 6;
+}
+/*----------------------------------------------------Images Settings---------------------------
+.Posters {
+  height: 10%;
+  width: 10%;
 }
 
 /*----------------------------------------------------Footer---------------------------------*/
@@ -107,6 +169,10 @@ padding: 10px;
 }
   /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
   @media screen and (max-width: 600px) {
+    html {
+      width: 100%;
+    }
+  
     .topnav a, .topnav input[type=text] {
       float: none;
       display: block;
@@ -118,5 +184,48 @@ padding: 10px;
     .topnav input[type=text] {
       border: 1px solid #ccc;
     }
+    
+    #searchBar {
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 17px;
+      max-width: 250px;
+      float: right;
+     
+    }
+    #accountButton {
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      float: right;
+      font-size: 17px;
+      max-width: 250px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      margin-top: 5%;
+      /*border: 1px solid rgb(255, 252, 252);-*/
+      border-color: antiquewhite;
+      justify-content: space-around ;
+      row-gap: 15px;
+      margin-left: 9%;
+      margin-right: 3%;
+    }
+    /*--------------Row 1 -------*/
+    #movie1Row1 {
+      grid-column: 1;
+    }
+    #movie2Row1 {
+      grid-column: 2;
+    }
+    #movie3Row1 {
+      grid-column: 3;
+    }
+    #movie4Row1 {
+      grid-column: 4;
+    }
+
   }
-/*-----------------------------------------------------------Connection Page-----------------------------------------------*/
