@@ -2,13 +2,10 @@
 document.getElementById("myInput").addEventListener("keyup", () => {
   //first declare variables
   let input = document.getElementById("myInput");
-  let filter = input.value.toUpperCase();
+  let filter = input.value.toUpperCase().trim();
   let table = document.getElementById("myTable");
   let li = table.getElementsByTagName("li");
 
-  //optional css (can be changed)
-  document.body.style.backgroundColor = "#1F1C18";
-  document.body.style.color = "black";
 
 // Loop through all list items, and hide those who don't match the search query
 
