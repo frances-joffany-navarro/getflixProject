@@ -2,14 +2,26 @@
 // Connect to DB
 include './DB/dbConnection.php';
 include './user.php';
+session_start();
 
+//verify if exists an id for the movie and if it's a nr.
 if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
     echo "<p><strong>MOVIE NOT FOUND</strong></p>";
     return;
 }
 
 $movieId = $_GET['movieId'];
-// $user = $_SESSION['user'];
+
+if (!isset($_SESSION['user'])) {
+?>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('comment').style.display = 'none';
+            document.getElementById("postButton").style.display = 'none';
+        }
+    </script>
+<?php
+}
 
 //Delete row from comments
 try {
@@ -55,8 +67,9 @@ WHERE film.film_id = $movieId");
 if (isset($_POST['comment'])) {
     // INSERT DATA IN DB
     $comment = $_POST['comment'];
-    $userId = 1;
-    $insertSql = "INSERT INTO comments (`comment`, `user_id`,`film_id` ) VALUES('$comment', $userId, $movieId)";
+    $user = $_SESSION['user'];
+    $userId = $user->id;
+    $insertSql = "INSERT INTO comments (`comment`, `user_id`, `film_id` ) VALUES('$comment', $userId, $movieId)";
 
     try {
         $result = $dbConnection->exec($insertSql);
@@ -108,8 +121,7 @@ if (isset($_POST['comment'])) {
         <form action="" method="post">
             <p><label for="comment">Comments:</label></p>
             <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment" required></textarea>
-            <br><br>
-            <input type="submit" value="Submit">
+            <input class="mt-4" id="postButton" type="submit" value="Submit">
         </form>
 
         <!-- CREATE TABLE -->
