@@ -63,7 +63,7 @@ while($row = $answer->fetch(PDO::FETCH_OBJ)){
   </main>
 
 <?php include 'footer.php';?>
-
+<script src="js/navbar.js"></script>
 </body>
 
 </html>
