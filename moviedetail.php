@@ -2,16 +2,21 @@
 // Connect to DB
 include './DB/dbConnection.php';
 include './user.php';
+include './permissions.php';
+session_start();
 
+$isUserLogged = isset($_SESSION['user']);
+$user = $isUserLogged ? $_SESSION['user'] : null;
+
+// verify if exists an id for the movie and if it's a nr.
 if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
     echo "<p><strong>MOVIE NOT FOUND</strong></p>";
     return;
 }
 
 $movieId = $_GET['movieId'];
-// $user = $_SESSION['user'];
 
-//Delete row from comments
+// Delete row from comments
 try {
     if (isset($_GET['commentId'])) {
         $idComment = $_GET['commentId'];
@@ -24,39 +29,41 @@ try {
     echo $deleteRow . "\n" . $exception->getMessage();
 }
 
-//Retrieve movie details from DB
+// Retrieve movie details from DB
 
 try {
-    $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name 
+    $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name, 
+    videos.video_id, videos.title
 FROM film  as film
 JOIN film_category as filmcategory ON film.film_id = filmcategory.film_id
 JOIN category as category ON filmcategory.category_id = category.category_id
+LEFT JOIN videos as videos ON film.trailer_id = videos.id
 WHERE film.film_id = $movieId");
-    //get row
+    // get row
     $data = $responseMovies->fetch();
     if ($data == false) {
         echo "<p><strong>MOVIE NOT FOUND</strong></p>";
         return;
     }
 
-    //get data
+    // get data
     $yearReleased = $data['year_released'];
     $categoryName = $data['category_name'];
     $description = $data['description'];
+    $trailerId = $data['video_id'];
+    $videoTitle = $data['title'];
 
     $responseMovies->closeCursor();
 } catch (PDOException $exception) {
     echo $exception->getMessage();
 }
 
-
 //MESSAGES
-//verify variables are not empty
-if (isset($_POST['comment'])) {
+$isCommentAdded = isset($_POST['comment']);
+if ($isCommentAdded) {
     // INSERT DATA IN DB
     $comment = $_POST['comment'];
-    $userId = 1;
-    $insertSql = "INSERT INTO comments (`comment`, `user_id`,`film_id` ) VALUES('$comment', $userId, $movieId)";
+    $insertSql = "INSERT INTO comments (`comment`, `user_id`, `film_id` ) VALUES('$comment', $user->id, $movieId)";
 
     try {
         $result = $dbConnection->exec($insertSql);
@@ -82,35 +89,48 @@ if (isset($_POST['comment'])) {
 <body>
     <div class="container mt-4">
         <!-- Display movie -->
-        <div class="row" ;>
-            <div class="col-8">
-                <h3><?php echo ($data['film_title']) ?></h3>
+        <div class="row mb-4" ;>
+            <div class="col-12 col-sm-6">
+                <h3 class="mb-4"><?php echo $data['film_title'] ?></h3>
 
                 <article>
-                    <p>Synopsis: <?php echo ($description) ?></p>
+                    <p class="mt-2">Synopsis: <?php echo $description ?></p>
                     <br><br>
 
-                    <p>Genre: <?php echo ($categoryName) ?></p>
-                    <p>Year: <?php echo ($yearReleased) ?></p>
+                    <p>Genre: <?php echo $categoryName ?></p>
+                    <p>Year: <?php echo $yearReleased ?></p>
                 </article>
             </div>
-            <div class="col-4">
-                <img src="./images/academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid">
+            <div class="col-12 col-sm-6 embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo $trailerId ?>" title="<?php echo $videoTitle ?>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
             </div>
-            <div class="col-3 offset-9">
-                <a class="btn btn-info" href="https://www.youtube.com/watch?v=P10p7ALXkcU&ab_channel=Cocomelon-NurseryRhymes" role="button">Watch the trailer</a>
-            </div>
-
         </div>
 
-        <br><br>
-        <hr>
-        <form action="" method="post">
-            <p><label for="comment">Comments:</label></p>
-            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment" required></textarea>
-            <br><br>
-            <input type="submit" value="Submit">
-        </form>
+        <p><label>Comments</label></p>
+        <?php
+        if ($isUserLogged) {
+            $responsePermissions = $dbConnection->query("SELECT permissions.description
+            FROM user_roles as userRoles 
+            JOIN role_permissions as rolePermissions ON userRoles.role_id = rolePermissions.role_id
+            JOIN permissions as permissions ON rolePermissions.permission_id = permissions.id
+            WHERE user_id=$user->id");
+
+            $userPermissions = $responsePermissions->fetchAll(PDO::FETCH_COLUMN, 0);
+
+            $canUserAddComment = in_array(Permissions::ADD_COMMENT, $userPermissions);
+
+            $canUserDeleteComment = in_array(Permissions::DELETE_COMMENT, $userPermissions);
+
+            if ($canUserAddComment) { ?>
+                <form action="" method="post" class="mt-4">
+                    <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment" required></textarea>
+                    <input class="mt-4 d-block" id="postButton" type="submit" value="Submit">
+                </form>
+        <?php
+            }
+        }
+        ?>
 
         <!-- CREATE TABLE -->
         <table class="table mt-4">
@@ -119,33 +139,49 @@ if (isset($_POST['comment'])) {
                     <th>Date</th>
                     <th>Name</th>
                     <th>Comment</th>
-                    <th>Delete</th>
+                    <?php if ($isUserLogged) { ?>
+                        <th>Delete</th>
+                    <?php } ?>
                 </tr>
             </thead>
 
             <?php
             //Retrieve last messages
-            $responseMessages = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, users.first_name
+            $responseMessages = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, comments.user_id, 
+            users.first_name,
+            userRoles.user_id
             FROM comments as comments 
             JOIN users as users ON users.id = comments.user_id
+            LEFT JOIN user_roles as userRoles ON comments.user_id = userRoles.user_id
             WHERE comments.film_id=$movieId
             ORDER BY created_at DESC LIMIT 0, 10");
 
             while ($data = $responseMessages->fetch()) {
                 $comment = $data['comment'];
-                $date = $data['created_at'];
-                $name = $data['first_name'];
+                $createdDate = $data['created_at'];
+                $firstName = $data['first_name'];
                 $commentId = $data['comment_id'];
+                $commentUserId = $data['user_id'];
+
             ?>
                 <tbody>
                     <tr>
-                        <td> <?php echo ($date) ?></td>
-                        <td> <?php echo ($name) ?> </td>
-                        <td> <?php echo ($comment) ?></td>
+                        <td> <?php echo $createdDate ?></td>
+                        <td> <?php echo $firstName ?> </td>
+                        <td> <?php echo $comment ?></td>
                         <td>
-                            <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
-                                <i class='fa fa-trash'></i>
-                            </a>
+                            <?php
+                            $isOwnComment = $isUserLogged && $commentUserId == $user->id;
+                            $canDeleteComment = $isUserLogged && ($canUserDeleteComment || $isOwnComment);
+
+                            if ($canDeleteComment) {
+                            ?>
+                                <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
+                                    <i id="delete" class='fa fa-trash'></i>
+                                </a>
+                            <?php
+                            }
+                            ?>
                         </td>
                     </tr>
                 </tbody>
