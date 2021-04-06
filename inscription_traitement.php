@@ -75,4 +75,15 @@ $insert->execute(array(
     'email' => $email,
     'password' => $password,
 ));
+//get user last user id from DB
+$last_id = $dbConnection->lastInsertId();
+
+//insert user role
+$inserationUserRole = "INSERT INTO user_roles (`user_id`, `role_id` ) VALUES($last_id, 2)";
+try {
+    $result = $dbConnection->exec($inserationUserRole);
+} catch (PDOException $exception) {
+    echo $exception->getMessage();
+}
+
 header('Location:inscription.php?reg_err=success');
