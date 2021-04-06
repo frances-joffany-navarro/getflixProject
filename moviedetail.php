@@ -4,7 +4,7 @@ include './DB/dbConnection.php';
 include './user.php';
 session_start();
 
-//verify if exists an id for the movie and if it's a nr.
+// verify if exists an id for the movie and if it's a nr.
 if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
     echo "<p><strong>MOVIE NOT FOUND</strong></p>";
     return;
@@ -12,9 +12,11 @@ if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
 
 $movieId = $_GET['movieId'];
 
+// verify user is not logged
 if (!isset($_SESSION['user'])) {
 ?>
     <script type="text/javascript">
+        // if not loged hide textarea
         window.onload = function() {
             document.getElementById('comment').style.display = 'none';
             document.getElementById("postButton").style.display = 'none';
@@ -23,7 +25,7 @@ if (!isset($_SESSION['user'])) {
 <?php
 }
 
-//Delete row from comments
+// Delete row from comments
 try {
     if (isset($_GET['commentId'])) {
         $idComment = $_GET['commentId'];
@@ -36,25 +38,28 @@ try {
     echo $deleteRow . "\n" . $exception->getMessage();
 }
 
-//Retrieve movie details from DB
+// Retrieve movie details from DB
 
 try {
-    $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name 
+    $responseMovies = $dbConnection->query("SELECT film.film_id, film_title, description, year_released, category_name, 
+    videos.video_id, videos.title
 FROM film  as film
 JOIN film_category as filmcategory ON film.film_id = filmcategory.film_id
 JOIN category as category ON filmcategory.category_id = category.category_id
+LEFT JOIN videos as videos ON film.trailer_id = videos.id
 WHERE film.film_id = $movieId");
-    //get row
+    // get row
     $data = $responseMovies->fetch();
     if ($data == false) {
         echo "<p><strong>MOVIE NOT FOUND</strong></p>";
         return;
     }
 
-    //get data
+    // get data
     $yearReleased = $data['year_released'];
     $categoryName = $data['category_name'];
     $description = $data['description'];
+    $trailerId = $data['video_id'];
 
     $responseMovies->closeCursor();
 } catch (PDOException $exception) {
@@ -63,7 +68,7 @@ WHERE film.film_id = $movieId");
 
 
 //MESSAGES
-//verify variables are not empty
+// verify variables are not empty
 if (isset($_POST['comment'])) {
     // INSERT DATA IN DB
     $comment = $_POST['comment'];
@@ -97,22 +102,29 @@ if (isset($_POST['comment'])) {
         <!-- Display movie -->
         <div class="row" ;>
             <div class="col-8">
-                <h3><?php echo ($data['film_title']) ?></h3>
+                <h3><?php echo $data['film_title'] ?></h3>
 
                 <article>
-                    <p>Synopsis: <?php echo ($description) ?></p>
+                    <p>Synopsis: <?php echo $description ?></p>
                     <br><br>
 
-                    <p>Genre: <?php echo ($categoryName) ?></p>
-                    <p>Year: <?php echo ($yearReleased) ?></p>
+                    <p>Genre: <?php echo $categoryName ?></p>
+                    <p>Year: <?php echo $yearReleased ?></p>
                 </article>
             </div>
             <div class="col-4">
-                <img src="./images/academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid">
+                <iframe 
+                width="300" height="200" src="https://www.youtube.com/embed/<?php echo $trailerId?>" 
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+                </iframe>
+                <button class="d-block">Watch the trailer</button>
+                
+                <!-- <img src="./images/academy_dinosaur.jpeg" alt="academy_dinosaur" class="rounded float-right img-fluid"> -->
             </div>
-            <div class="col-3 offset-9">
+            <!-- <div class="col-3 offset-9">
                 <a class="btn btn-info" href="https://www.youtube.com/watch?v=P10p7ALXkcU&ab_channel=Cocomelon-NurseryRhymes" role="button">Watch the trailer</a>
-            </div>
+            </div> -->
 
         </div>
 
@@ -121,7 +133,7 @@ if (isset($_POST['comment'])) {
         <form action="" method="post">
             <p><label for="comment">Comments:</label></p>
             <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment" required></textarea>
-            <input class="mt-4" id="postButton" type="submit" value="Submit">
+            <input class="mt-4 d-block" id="postButton" type="submit" value="Submit">
         </form>
 
         <!-- CREATE TABLE -->
