@@ -2435,6 +2435,19 @@ CREATE TABLE IF NOT EXISTS `comments` (
   ALTER TABLE `comments` 
 	ADD CONSTRAINT `comments_film_fk` FOREIGN KEY (`film_id`) REFERENCES `film`(`film_id`) ON DELETE CASCADE ON UPDATE RESTRICT;
  
+ --
+-- Table structure for table `pwdreset`
+--
+
+DROP TABLE IF EXISTS `pwdreset`;
+CREATE TABLE IF NOT EXISTS `pwdreset` (
+  `pwdResetId` int(11) NOT NULL AUTO_INCREMENT,
+  `pwdResetEmail` text NOT NULL,
+  `pwdResetSelector` text NOT NULL,
+  `pwdResetToken` longtext NOT NULL,
+  `pwdResetExpires` text NOT NULL,
+  PRIMARY KEY (`pwdResetId`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
  
 COMMIT;
