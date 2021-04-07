@@ -1,74 +1,73 @@
+/*--------------------------------------------------------General colors --------------------------------*/
+body,
+main,
+header,
+footer {
+  background-color: rgb(22, 39, 39);
+  text-align: center;
+}
+p {
+  color: whitesmoke;
+}
 
-  /*--------------------------------------------------------General colors --------------------------------*/
-  body, main, header, footer {
-    background-color: rgb(22, 39, 39);
-    text-align: center;
-  }
-  p {
-    color:whitesmoke;
-  }
-  
-  .dropdown-item {
-      background-color: rgb(22, 39, 39);
-  }
-  div {
-    color: whitesmoke;
-  }
-  a {
-    color: #79b8f3;
-  }
-  /*--------------------------------------------------------Navigation Bar --------------------------------*/
-  .topnav {
-      background-color: rgb(22, 39, 39);
-    }
-    .topnav a {
-      float: left;
-      color: rgb(250, 250, 250);
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-    }
-    .topnav a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-    .topnav a.active {
-      background-color: #90cf47;
-      color: whitesmoke;
-    }
-   
-  /*----------------------------------------------------Footer---------------------------------*/
-  #bottomLogo {
-  color:whitesmoke;
+.dropdown-item {
+  background-color: rgb(22, 39, 39);
+}
+div {
+  color: whitesmoke;
+}
+a {
+  color: #79b8f3;
+}
+/*--------------------------------------------------------Navigation Bar --------------------------------*/
+.topnav {
+  background-color: rgb(22, 39, 39);
+}
+.topnav a {
+  float: left;
+  color: rgb(250, 250, 250);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.topnav a.active {
+  background-color: #90cf47;
+  color: whitesmoke;
+}
+
+/*----------------------------------------------------Footer---------------------------------*/
+#bottomLogo {
+  color: whitesmoke;
   margin: auto;
   width: 50%;
   text-align: center;
   padding: 10px;
+}
+#bottomLinks {
+  color: whitesmoke;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding: 10px;
+}
+
+@media only screen and (min-width: 680px) {
+  #accountButton {
+    float: right;
   }
-  #bottomLinks {
-    color:whitesmoke;
-    margin: auto;
-    width: 50%;
-    text-align: center;
-    padding: 10px;
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  @media only screen and (min-width: 680px) {
-       
-        #accountButton {
-            float:right;
-        }
-        ul{
-            display: grid;
-            grid-template-columns: repeat(3, 1fr );
-          }
-}  
-@media only screen and (min-width: 1000px) { 
-    ul{
-        display: grid;
-        grid-template-columns: repeat(4, 1fr );
-      }
-
-
+}
+@media only screen and (min-width: 1000px) {
+  ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

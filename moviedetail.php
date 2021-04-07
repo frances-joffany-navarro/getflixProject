@@ -86,6 +86,7 @@ include 'navbar.php';
     <title>Movie details</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/moviedetail.css">
 </head>
 
 <body>
@@ -126,7 +127,7 @@ include 'navbar.php';
 
             if ($canUserAddComment) { ?>
                 <form action="" method="post" class="mt-4">
-                    <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment" required></textarea>
+                    <textarea id="comment" name="comment" rows="3" cols="40" placeholder="Write a comment" required></textarea>
                     <input class="mt-4 d-block" id="postButton" type="submit" value="Submit">
                 </form>
         <?php
@@ -135,7 +136,9 @@ include 'navbar.php';
         ?>
 
         <!-- CREATE TABLE -->
+        
         <table class="table mt-4">
+            <?php if($isCommentAdded) { ?>
             <thead>
                 <tr>
                     <th>Date</th>
@@ -146,6 +149,7 @@ include 'navbar.php';
                     <?php } ?>
                 </tr>
             </thead>
+            <?php }?>
 
             <?php
             //Retrieve last messages
