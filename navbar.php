@@ -1,10 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
 <?php include "DB/DBConnection.php";?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" href="css/style.css">
 
 <header>
-            <strong><p>GetFlix Logo</p></strong>
+            <p><img src="images/logoGetFlix.png" alt="GetFlix Logo"></p>
             <div class="topnav">
                     <a class="active" href="#home">Home</a>
                     <a href="#movies">Movies</a>
@@ -19,7 +19,7 @@
           $answer = $dbConnection->query($sql);
     //display all movies
     while($row = $answer->fetch(PDO::FETCH_OBJ)){
-        echo    "<li><a class=dropdown-item href=index.php?category=".$row->category_name.">".$row->category_name."</a></li>";}?>
+        echo    "<li><a class=dropdown-item href=finalIndex.php?category=".$row->category_name.">".$row->category_name."</a></li>";}?>
           </ul>
         </li>
         <div class="col-auto" id="accountButton">
