@@ -19,7 +19,7 @@
           $answer = $dbConnection->query($sql);
     //display all movies
     while($row = $answer->fetch(PDO::FETCH_OBJ)){
-        echo    "<li><a class=dropdown-item href=finalIndex.php?category=".$row->category_name.">".$row->category_name."</a></li>";}?>
+        echo    "<li><a class=dropdown-item href=index.php?category=".$row->category_name.">".$row->category_name."</a></li>";}?>
           </ul>
         </li>
         <div class="col-auto" id="accountButton">

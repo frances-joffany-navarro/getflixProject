@@ -1,6 +1,6 @@
 document.getElementById('button-addon2').addEventListener('click', ()=>{
     let userInput  = document.getElementById("myInput").value;
-    window.location = "finalIndex.php?search="+userInput;
+    window.location = "index.php?search="+userInput;
 })
 
 let input = document.getElementById("myInput").addEventListener("keyup", function(event) {
