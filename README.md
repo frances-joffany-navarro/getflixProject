@@ -1,6 +1,6 @@
 # Getflix Project
-This group project is an **Streaming Site** inspired by *Amazon Prime Video* and *Netflix*. The goal is to **display a catalog of movies**.
-The objective of this project is to let the group practice what they've learned about Backend *(PHP / SQL Database)* during the pass few days. This is a **10 days project** and it started ***March 29*** until ***April 12, 2021***.
+This group project is a **Streaming Site** inspired by *Amazon Prime Video* and *Netflix*. The goal is to **display a catalog of movies**.
+The objective of this project is to let the group practice what they've learned about Backend *(PHP / SQL Database)* during the pass few days. This is a **10 days project** and it starts ***March 29*** until ***April 12, 2021***.
 
 ## Website - coming soon
 
