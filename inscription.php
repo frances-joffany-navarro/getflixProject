@@ -102,8 +102,8 @@
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
             </div>
         </form>
+        <p class="text-center">Already have an account? <a href="indexBis.php">Sign in</a></p>
     </div>
-
 </body>
 
 </html>
