@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="css/style2.css">
 
 <header>
-            <strong><p>GetFlix Logo</p></strong>
+    <p><img src="images/logoGetFlix.png" alt="GetFlix Logo"></p>
             <div class="topnav">
                     <a class="active" href="#home">Home</a>
                     <a href="#movies">Movies</a>
