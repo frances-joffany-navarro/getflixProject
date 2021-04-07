@@ -97,11 +97,11 @@ include 'navbar.php';
                 <h3 class="mb-4"><?php echo $data['film_title'] ?></h3>
 
                 <article>
-                    <p class="mt-2">Synopsis: <?php echo $description ?></p>
+                    <p class="mt-2"><strong>Synopsis:</strong> <?php echo $description ?></p>
                     <br><br>
 
-                    <p>Genre: <?php echo $categoryName ?></p>
-                    <p>Year: <?php echo $yearReleased ?></p>
+                    <p><strong>Genre:</strong> <?php echo $categoryName ?></p>
+                    <p><strong>Year:</strong> <?php echo $yearReleased ?></p>
                 </article>
             </div>
             <div class="col-12 col-sm-6 embed-responsive embed-responsive-16by9">
@@ -110,7 +110,7 @@ include 'navbar.php';
             </div>
         </div>
 
-        <p><label>Comments</label></p>
+        <p><label><strong>Comments</strong></label></p>
         <?php
         if ($isUserLogged) {
             $responsePermissions = $dbConnection->query("SELECT permissions.description
@@ -128,7 +128,7 @@ include 'navbar.php';
             if ($canUserAddComment) { ?>
                 <form action="" method="post" class="mt-4">
                     <textarea id="comment" name="comment" rows="3" cols="40" placeholder="Write a comment" required></textarea>
-                    <input class="mt-4 d-block" id="postButton" type="submit" value="Submit">
+                    <input class="mt-4 d-block btn btn-outline-success" id="postButton" type="submit" value="Post">
                 </form>
         <?php
             }
@@ -137,7 +137,7 @@ include 'navbar.php';
 
         <!-- CREATE TABLE -->
         
-        <table class="table mt-4">
+        <table class="table mt-4 mb-4">
             <?php if($isCommentAdded) { ?>
             <thead>
                 <tr>
