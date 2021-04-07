@@ -41,7 +41,15 @@
               }
               else{
                   //movies categorised and displayed
-        $sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id";
+                  session_start();
+                  // Page was not reloaded via a button press
+                  
+                  $index=$_SESSION['index'];
+                  if (!isset($_GET['more'])) {
+                      $_SESSION['index'] = 0; // Reset counter
+                  }
+               
+        $sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id limit $index,100";
         $answer = $dbConnection->query($sql);
         while($row = $answer->fetch(PDO::FETCH_OBJ)){
             echo "<li>
@@ -59,6 +67,11 @@
         ?>
             </ul>
       
+<form method='get'>
+<input name='more' type="submit" value='View more'>
+<?php $_SESSION['index']+=100; if($_SESSION['index']>900){$_SESSION['index']=900;};?>
+</form>
+
   </main>
 
 <?php include 'footer.php';?>
