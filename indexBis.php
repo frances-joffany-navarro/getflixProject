@@ -61,8 +61,21 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                 </div>   
+                <p class="text-center"><a href="reset-password.php">Forgot your password?</a></p>
+                
+                
             </form>
-            <p class="text-center"><a href="inscription.php">Register</a></p>
+            
+            <p class="text-center"><a href="inscription.php">Create a new account</a></p>
+            <?php
+                if (isset($_GET['message'])) {
+                    if ($_GET['message'] == "passwordupdated") {
+                        echo "<p class='text-center text-success'>Password successfully updated.</p>";
+                    }elseif ($_GET['message'] == "validate") {
+                        echo "<p class='text-center text-danger'>Could not validate your request!</p>";
+                    }
+                }
+                ?>
         </div>
         </body>
 </html>
