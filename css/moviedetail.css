@@ -1,4 +1,14 @@
 h3,
 p {
   color: black !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h3{
+  color: rgb(51, 107, 51) !important;
+  font-family: 'fangsong';
+}
+
+.dropdown-item {
+  background-color: rgb(22, 39, 39) !important;
 }
