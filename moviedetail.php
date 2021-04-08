@@ -116,7 +116,6 @@ include 'navbar.php';
             </div>
         </div>
 
-        <p><label><strong>Comments</strong></label></p>
         <?php
         if ($isUserLogged) {
             $responsePermissions = $dbConnection->query("SELECT permissions.description
@@ -141,69 +140,66 @@ include 'navbar.php';
         }
         ?>
 
+
         <!-- CREATE TABLE -->
+        <?php if (true) { ?>
 
-        <table class="table mt-4 mb-4">
-            <?php if ($isCommentAdded) { ?>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Comment</th>
-                        <?php if ($isUserLogged) { ?>
-                            <th>Delete</th>
-                        <?php } ?>
-                    </tr>
-                </thead>
-            <?php } ?>
+            <ul class="list-group ul-comments mt-4 px-4 mx-auto">
+                <li class="list-group-item comment-list mb-3">
+                    <p>
+                        <label>
+                            <strong>Comments</strong>
+                        </label>
+                    </p>
+                </li>
 
-            <?php
-            //Retrieve last messages
-            $responseMessages = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, comments.user_id, 
-            users.first_name,
-            userRoles.user_id
-            FROM comments as comments 
-            JOIN users as users ON users.id = comments.user_id
-            LEFT JOIN user_roles as userRoles ON comments.user_id = userRoles.user_id
-            WHERE comments.film_id=$movieId
-            ORDER BY created_at DESC LIMIT 0, 10");
+                <?php
+                //Retrieve last messages
+                $responseMessages = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, comments.user_id, 
+                users.first_name,
+                userRoles.user_id
+                FROM comments as comments 
+                JOIN users as users ON users.id = comments.user_id
+                LEFT JOIN user_roles as userRoles ON comments.user_id = userRoles.user_id
+                WHERE comments.film_id=$movieId
+                ORDER BY created_at DESC LIMIT 0, 10");
 
-            while ($data = $responseMessages->fetch()) {
-                $comment = $data['comment'];
-                $createdDate = $data['created_at'];
-                $firstName = $data['first_name'];
-                $commentId = $data['comment_id'];
-                $commentUserId = $data['user_id'];
+                while ($data = $responseMessages->fetch()) {
+                    $comment = $data['comment'];
+                    $createdDate = $data['created_at'];
+                    $firstName = $data['first_name'];
+                    $commentId = $data['comment_id'];
+                    $commentUserId = $data['user_id'];
 
-            ?>
-                <tbody>
-                    <tr>
-                        <td> <?php echo $createdDate ?></td>
-                        <td> <?php echo $firstName ?> </td>
-                        <td> <?php echo $comment ?></td>
-                        <td>
-                            <?php
-                            $isOwnComment = $isUserLogged && $commentUserId == $user->id;
-                            $canDeleteComment = $isUserLogged && ($canUserDeleteComment || $isOwnComment);
+                ?>
+                    <li class="list-group-item comment-list comment-name">
+                        <b><?php echo $firstName ?> </b>commented
+                        <i class="comment-date"> * <?php echo $createdDate ?></i>
+                        <?php
+                        $isOwnComment = $isUserLogged && $commentUserId == $user->id;
+                        $canDeleteComment = $isUserLogged && ($canUserDeleteComment || $isOwnComment);
 
-                            if ($canDeleteComment) {
-                            ?>
-                                <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
-                                    <i id="delete" class='fa fa-trash'></i>
-                                </a>
-                            <?php
-                            }
-                            ?>
-                        </td>
-                    </tr>
-                </tbody>
+                        if ($canDeleteComment) {
+                        ?>
+                            <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
+                                <i class='fa fa-trash delete-icon'></i>
+                            </a>
+                        <?php
+                        }
+                        ?>
 
-            <?php
-            }
+                    </li>
 
-            $responseMessages->closeCursor();
-            ?>
-        </table>
+                    <li class="list-group-item comment-list fs-5 mb-3">
+                        <?php echo $comment ?>
+                        <hr>
+                    </li>
+                <?php
+                }
+                $responseMessages->closeCursor();
+                ?>
+            </ul>
+        <?php } ?>
     </div>
 
     <?php include 'footer.php'; ?>

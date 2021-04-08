@@ -11,8 +11,30 @@ h3 {
   font-family: "fangsong";
 }
 
-
-.container{
+.container {
   background-color: white !important;
 }
 
+.delete-icon {
+  margin-left: 2%;
+}
+
+.comment-list {
+  border: none;
+  padding: 0;
+  
+}
+
+.comment-date {
+  font-size: small;
+  color: #808080a6;
+}
+
+.comment-name {
+  font-size: small;
+  color: #808080a6;
+}
+
+.ul-comments {
+  max-width: 80%;
+}
