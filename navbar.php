@@ -37,7 +37,7 @@
         </li>  
       </ul>
       <form class="d-flex my-2 " id="searchBar">      
-        <input class="form-control me-2" type="search" name="input" id="myInput" value="<?php echo !empty($_GET['search']) ? $_GET['search'] : NULL; ?>" placeholder="Search title/category" aria-label="Recipient's username">
+        <input class="form-control me-2" type="search" autocomplete="on" name="search" id="myInput" value="<?php echo !empty($_GET['search']) ? $_GET['search'] : NULL; ?>" placeholder="Search title/category" aria-label="Recipient's username">
         <button class="btn btn-outline-success me-2" type="button" name="search" id="button-addon2">Search</button>
       </form>
       <!-- Start of Linking of pages -->
