@@ -84,13 +84,13 @@ include 'navbar.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie details</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="./css/moviedetail.css">
 </head>
 
 <body>
-    <div class="container mt-4">
+    <div class="container mt-4 text-start">
         <!-- Display movie -->
         <div class="row mb-4" ;>
             <div class="col-12 col-sm-6">
@@ -104,9 +104,11 @@ include 'navbar.php';
                     <p><strong>Year:</strong> <?php echo $yearReleased ?></p>
                 </article>
             </div>
-            <div class="col-12 col-sm-6 embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<?php echo $trailerId ?>" title="<?php echo $videoTitle ?>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                </iframe>
+            <div class="col-12 col-sm-6">
+                <div class="ratio ratio-16x9">
+                    <iframe class="" src="https://www.youtube.com/embed/<?php echo $trailerId ?>" title="<?php echo $videoTitle ?>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe>
+                </div>
             </div>
         </div>
 
@@ -136,20 +138,20 @@ include 'navbar.php';
         ?>
 
         <!-- CREATE TABLE -->
-        
+
         <table class="table mt-4 mb-4">
-            <?php if($isCommentAdded) { ?>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Comment</th>
-                    <?php if ($isUserLogged) { ?>
-                        <th>Delete</th>
-                    <?php } ?>
-                </tr>
-            </thead>
-            <?php }?>
+            <?php if ($isCommentAdded) { ?>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Comment</th>
+                        <?php if ($isUserLogged) { ?>
+                            <th>Delete</th>
+                        <?php } ?>
+                    </tr>
+                </thead>
+            <?php } ?>
 
             <?php
             //Retrieve last messages
@@ -199,10 +201,11 @@ include 'navbar.php';
             ?>
         </table>
     </div>
+
     <?php include 'footer.php'; ?>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script> -->
 </body>
 
 </html>
