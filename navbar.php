@@ -25,7 +25,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Movies by Genre
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul tabindex="0" id = "dropdown" class="dropdown-menu pre-scrollable" aria-labelledby="navbarDropdown">
             <?php
             $sql = "SELECT category_name FROM `category`";
             $answer = $dbConnection->query($sql);
