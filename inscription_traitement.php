@@ -87,3 +87,24 @@ try {
 }
 
 header('Location:inscription.php?reg_err=success');
+
+//newsletter proceeding with mailchimp
+if(isset($_POST['newsletter'])){
+    require('.\mailchimp\Mailchimp.php');    // You may have to modify the path based on your own configuration.
+    
+    $api_key = "e99621dde35f1d52e87f032bd8fb0395-us1";
+    $list_id = "8f0e6a9d56";
+    
+    $Mailchimp = new Mailchimp( $api_key );
+    $Mailchimp_Lists = new Mailchimp_Lists( $Mailchimp );
+    
+        $subscriber = $Mailchimp_Lists->subscribe(
+            $list_id,
+            array('email' => $_POST['email']),      // Specify the e-mail address you want to add to the list.
+            array('FNAME' => $_POST['firstName'], 'LNAME' => $_POST['lastName']),   // Set the first name and last name for the new subscriber.
+            'html',    // Specify the e-mail message type: 'html' or 'text'
+            FALSE,     // Set double opt-in: If this is set to TRUE, the user receives a message to confirm they want to be added to the list.
+            TRUE       // Set update_existing: If this is set to TRUE, existing subscribers are updated in the list. If this is set to FALSE, trying to add an existing subscriber causes an error.
+        ); 
+    }
+    ?>
