@@ -62,11 +62,11 @@
                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                 </div>   
                 <p class="text-center"><a href="reset-password.php">Forgot your password?</a></p>
-                
-                
             </form>
             
             <p class="text-center"><a href="inscription.php">Create a new account</a></p>
+            <hr>
+            <p class="text-center"><a href="index.php">Return to homepage</a></p>
             <?php
                 if (isset($_GET['message'])) {
                     if ($_GET['message'] == "passwordupdated") {

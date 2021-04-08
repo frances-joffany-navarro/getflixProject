@@ -33,7 +33,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
                 $user->password = $data['password'];
 
                 $_SESSION['user'] = $user;
-                header('Location: landing.php');
+                header('Location: index.php');
                 die();
             } else {
                 header('Location: indexBis.php?login_err=password');
