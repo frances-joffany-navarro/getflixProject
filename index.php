@@ -42,9 +42,32 @@ session_start();
                 </li>";
                     }
               }
+     
+              elseif(isset($_GET['search'])){
+            $input= $_GET['input'];
+            $sql = "SELECT * FROM `film` join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id WHERE `film_title` like '$input%' or `film_title` like '%$input' ";
+            $answer = $dbConnection->query($sql);
+            //display all movies
+            while($row = $answer->fetch(PDO::FETCH_OBJ)){
+                    echo "<li>
+                    <div><figure>
+                    <a href=moviedetail.php?movieId=".$row->film_id.">
+                    <img src='images/academy_dinosaur.jpeg' alt=$row->film_title>
+                    </a>
+                    <figcaption>".$row->film_title."</figcaption>
+                    <figcaption>".$row->category_name."</figcaption>
+                </figure>
+                </div>
+                </li>";}
+              
+                session_destroy();}
+
               else{
+                session_start();
+                  // Page was not reloaded via a button press
+                  $index=isset($_GET['more'])?$_SESSION['index']:0; 
                   //movies categorised and displayed
-        $sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id";
+        $sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id  limit $index,100";
         $answer = $dbConnection->query($sql);
         while($row = $answer->fetch(PDO::FETCH_OBJ)){
             echo "<li>
@@ -60,6 +83,11 @@ session_start();
               }
         ?>
             </ul>
+            <form method='get'>
+<input name='more' type="submit" value='View more'>
+<?php echo $_SESSION['index']+=100; ?>
+</form>
+
   </main>
 <?php include 'footer.php';?>
 <script src="js/navbar.js"></script>
