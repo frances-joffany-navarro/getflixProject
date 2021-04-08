@@ -44,7 +44,7 @@ session_start();
               }
      
               elseif(isset($_GET['search'])){
-            $input= $_GET['input'];
+                $input=isset($_GET['search'])? $_GET['input']:"";
             $sql = "SELECT * FROM `film` join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id WHERE `film_title` like '$input%' or `film_title` like '%$input' ";
             $answer = $dbConnection->query($sql);
             //display all movies
@@ -63,7 +63,6 @@ session_start();
                 session_destroy();}
 
               else{
-                session_start();
                   // Page was not reloaded via a button press
                   $index=isset($_GET['more'])?$_SESSION['index']:0; 
                   //movies categorised and displayed
@@ -85,7 +84,7 @@ session_start();
             </ul>
             <form method='get'>
 <input name='more' type="submit" value='View more'>
-<?php echo $_SESSION['index']+=100; ?>
+<?php $_SESSION['index']+=100; ?>
 </form>
 
   </main>
