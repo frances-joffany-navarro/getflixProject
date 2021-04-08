@@ -40,6 +40,10 @@ JOIN category as category ON filmcategory.category_id = category.category_id
 LEFT JOIN videos as videos ON film.trailer_id = videos.id
 WHERE film.film_id = $movieId");
     // get row
+    if ($responseMovies == false) {
+        echo "<p><strong>MOVIE NOT FOUND</strong></p>";
+        return;
+    }
     $data = $responseMovies->fetch();
     if ($data == false) {
         echo "<p><strong>MOVIE NOT FOUND</strong></p>";
