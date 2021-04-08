@@ -1,4 +1,8 @@
-<?php include 'DB/dbConnection.php';?>
+<?php 
+include 'DB/dbConnection.php';
+include './user.php';
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +15,6 @@
   <link rel="stylesheet" href="css/style.css">
 
   <title>Home</title>
-
 </head>
 
 <body>
@@ -55,12 +58,9 @@
         </div>
         </li>";}
               }
-
         ?>
             </ul>
-      
   </main>
-
 <?php include 'footer.php';?>
 <script src="js/navbar.js"></script>
 </body>
