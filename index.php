@@ -27,14 +27,14 @@ session_start();
                 $category = !empty($_GET['category']) ? $_GET['category'] : NULL;
 //code to execute if category selected -> diplay all the movies in this category
               if(isset($category)){
-                $sqlCategory = "SELECT film_title, film.film_id, category_name FROM `film` join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id where category.category_name = '$category'";
+                $sqlCategory = "SELECT film_title, film.film_id, category_name, videos.thumbnail_url, FROM `film` join videos on videos.id=film.trailer_id join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id where category.category_name = '$category'";
                 $result = $dbConnection->query($sqlCategory);
                     //display all movies
                     while($row = $result->fetch(PDO::FETCH_OBJ)){
                       echo  "<li>
                       <div><figure>
                       <a href=moviedetail.php?movieId=".$row->film_id.">
-                      <img src='images/academy_dinosaur.jpeg' alt=$row->film_title>
+                      <img width=275 src=".$row->thumbnail_url." alt=$row->film_title>
                       </a>
                       <figcaption>".$row->film_title."</figcaption>
                       <figcaption>".$row->category_name."</figcaption>
@@ -46,14 +46,14 @@ session_start();
 //code to execute if an input is typed to the search bar
               elseif(isset($_GET['search'])){
                 $input=isset($_GET['search'])? $_GET['search']:"";
-            $sql = "SELECT * FROM `film` join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id WHERE `film_title` like '$input%' or `film_title` like '%$input' ";
+            $sql = "SELECT * FROM `film` join film_category on film.film_id = film_category.film_id join videos on videos.id=film.trailer_id join category on film_category.category_id = category.category_id WHERE `film_title` like '$input%' or `film_title` like '%$input' ";
             $answer = $dbConnection->query($sql);
             //display all movies
             while($row = $answer->fetch(PDO::FETCH_OBJ)){
                     echo "<li>
                     <div><figure>
                     <a href=moviedetail.php?movieId=".$row->film_id.">
-                    <img src='images/academy_dinosaur.jpeg' alt=$row->film_title>
+                    <img width=275 src=".$row->thumbnail_url." alt=$row->film_title>
                     </a>
                     <figcaption>".$row->film_title."</figcaption>
                     <figcaption>".$row->category_name."</figcaption>
@@ -61,20 +61,20 @@ session_start();
                 </div>
                 </li>";}
               
+                // session_destroy();
             }
 //code to execute by default on the landing page
               else{
                   // Page was not reloaded via a button press
-                  
                   $index=isset($_POST['more'])?$_SESSION['index']:0; 
                   //movies categorised and displayed
-        $sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id  limit $index,20";
+        $sql = "select film.film_title, film.film_id, film.description, film.year_released, videos.thumbnail_url, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id join videos on videos.id=film.trailer_id  limit $index,20";
         $answer = $dbConnection->query($sql);
         while($row = $answer->fetch(PDO::FETCH_OBJ)){
             echo "<li>
             <div><figure>
             <a href=moviedetail.php?movieId=".$row->film_id.">
-            <img src='images/academy_dinosaur.jpeg' alt=$row->film_title>
+            <img width=275 src=".$row->thumbnail_url." alt=$row->film_title>
             </a>
             <figcaption>".$row->film_title."</figcaption>
             <figcaption>".$row->category_name."</figcaption>
