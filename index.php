@@ -61,13 +61,14 @@ session_start();
                 </div>
                 </li>";}
               
-                session_destroy();}
+            }
 //code to execute by default on the landing page
               else{
                   // Page was not reloaded via a button press
+                  
                   $index=isset($_POST['more'])?$_SESSION['index']:0; 
                   //movies categorised and displayed
-        $sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id  limit $index,100";
+        $sql = "select film.film_title, film.film_id, film.description, film.year_released, category.category_name from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id  limit $index,20";
         $answer = $dbConnection->query($sql);
         while($row = $answer->fetch(PDO::FETCH_OBJ)){
             echo "<li>
