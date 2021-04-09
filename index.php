@@ -86,7 +86,7 @@ session_start();
         </ul>
         <form method='POST'>
             <input name='more' type="submit" value='View more'>
-            <?php $_SESSION['index']+=100; ?>
+            <?php $_SESSION['index']+=20; ?>
         </form>
 
     </main>
