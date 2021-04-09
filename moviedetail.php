@@ -140,11 +140,24 @@ include 'navbar.php';
         }
         ?>
 
+        <!-- CREATE COMMENT LIST -->
+        <?php
+        //Retrieve last comments
+        $responseComments = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, comments.user_id, 
+        users.first_name,
+        userRoles.user_id
+        FROM comments as comments 
+        JOIN users as users ON users.id = comments.user_id
+        LEFT JOIN user_roles as userRoles ON comments.user_id = userRoles.user_id
+        WHERE comments.film_id=$movieId
+        ORDER BY created_at DESC LIMIT 0, 10");
 
-        <!-- CREATE TABLE -->
-        <?php if (true) { ?>
+        $hasComments = $responseComments->rowCount() > 0;
+
+        if ($hasComments) { ?>
 
             <ul class="list-group ul-comments mt-4 px-4 mx-auto">
+
                 <li class="list-group-item comment-list mb-3">
                     <p>
                         <label>
@@ -154,17 +167,7 @@ include 'navbar.php';
                 </li>
 
                 <?php
-                //Retrieve last messages
-                $responseMessages = $dbConnection->query("SELECT comment_id, comments.film_id, comment, created_at, comments.user_id, 
-                users.first_name,
-                userRoles.user_id
-                FROM comments as comments 
-                JOIN users as users ON users.id = comments.user_id
-                LEFT JOIN user_roles as userRoles ON comments.user_id = userRoles.user_id
-                WHERE comments.film_id=$movieId
-                ORDER BY created_at DESC LIMIT 0, 10");
-
-                while ($data = $responseMessages->fetch()) {
+                while ($data = $responseComments->fetch()) {
                     $comment = $data['comment'];
                     $createdDate = $data['created_at'];
                     $firstName = $data['first_name'];
@@ -175,6 +178,7 @@ include 'navbar.php';
                     <li class="list-group-item comment-list comment-name">
                         <b><?php echo $firstName ?> </b>commented
                         <i class="comment-date"> * <?php echo $createdDate ?></i>
+
                         <?php
                         $isOwnComment = $isUserLogged && $commentUserId == $user->id;
                         $canDeleteComment = $isUserLogged && ($canUserDeleteComment || $isOwnComment);
@@ -196,7 +200,7 @@ include 'navbar.php';
                     </li>
                 <?php
                 }
-                $responseMessages->closeCursor();
+                $responseComments->closeCursor();
                 ?>
             </ul>
         <?php } ?>
