@@ -94,7 +94,7 @@ include 'navbar.php';
 </head>
 
 <body>
-    <div class="container mt-4 text-start">
+    <div class="container text-start">
         <!-- Display movie -->
         <div class="row mb-4" ;>
             <div class="col-12 col-sm-6">
