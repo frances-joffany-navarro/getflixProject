@@ -27,7 +27,7 @@ session_start();
                 $category = !empty($_GET['category']) ? $_GET['category'] : NULL;
 //code to execute if category selected -> diplay all the movies in this category
               if(isset($category)){
-                $sqlCategory = "SELECT film_title, film.film_id, category_name, videos.thumbnail_url, FROM `film` join videos on videos.id=film.trailer_id join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id where category.category_name = '$category'";
+                $sqlCategory = "SELECT film_title, film.film_id, category.category_name, videos.thumbnail_url FROM `film` join videos on videos.id=film.trailer_id join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id where category.category_name = '$category'";
                 $result = $dbConnection->query($sqlCategory);
                     //display all movies
                     while($row = $result->fetch(PDO::FETCH_OBJ)){
