@@ -93,8 +93,8 @@ if (isset($_POST['reset-request-submit'])) {
                 $mail->isSMTP();    
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'getflixproject@gmail.com';
-                $mail->Password = '.GFproject0406';    
+                $mail->Username = '';
+                $mail->Password = '';    
                 $mail->Port = '465';
                 $mail->SMTPSecure = 'ssl';    
                 //End SMTP settings
