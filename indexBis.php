@@ -48,7 +48,21 @@
                         break;
                     }
                 }
-                ?> 
+
+                if (isset($_GET['status'])) {
+                    if ($_GET['status'] == "pwdupdated") {?>
+                        <div class="alert alert-success" role="alert">
+                        <h6>Password successfully updated.</h6>
+                        <p class="fw-lighter">You can now use your new password to login.</p>
+                        </div>
+                    <?php }elseif ($_GET['status'] == "emptytoken") { ?>
+                        <div class="alert alert-danger" role="alert">
+                        <h6>Link is invalid.</h6>
+                        <p class="fw-lighter">Please open the link sent to your email.</p>
+                        </div>
+                <?php }
+                }
+                ?>
             
             <form action="connexion.php" method="post">
                 <h2 class="text-center">Log in</h2>       
@@ -67,15 +81,7 @@
             <p class="text-center"><a href="inscription.php">Create a new account</a></p>
             <hr>
             <p class="text-center"><a href="index.php">Return to homepage</a></p>
-            <?php
-                if (isset($_GET['message'])) {
-                    if ($_GET['message'] == "passwordupdated") {
-                        echo "<p class='text-center text-success'>Password successfully updated.</p>";
-                    }elseif ($_GET['message'] == "validate") {
-                        echo "<p class='text-center text-danger'>Could not validate your request!</p>";
-                    }
-                }
-                ?>
+    
         </div>
         </body>
 </html>
