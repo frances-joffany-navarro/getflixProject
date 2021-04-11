@@ -58,7 +58,7 @@
               <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="profil.php">Profile</a></li>
+              <li><a class="dropdown-item" href="newLanding.php">Profile</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="deconnexion.php">Signout</a></li>
             </ul>

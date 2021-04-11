@@ -33,12 +33,10 @@ $user = $_SESSION['user'];
       <img class="img-fluid mb-3" src="images/avatar-profilPhp.jpg" alt="profile">
       <div class="col-12">
         <div class="text-center">
-          <h1><?php echo $user->firstName . " " . $user->lastName; ?></h1>
+          <h1><?php echo "$user->firstName $user->lastName"; ?></h1>
           <h5><?php echo $user->email; ?></h5>      
         </div>
       </div>
     </div>  
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>    
   </body>
 </html>
