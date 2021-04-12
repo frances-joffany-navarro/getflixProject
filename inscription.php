@@ -100,7 +100,7 @@
             <div class="form-group">
                 <input type="password" name="password_retype" class="form-control" placeholder="Confirm password" required="required" autocomplete="off">
             </div>
-            <div class="form-check form-switch">
+            <div class="form-check form-switch mb-3">
                 <input class="form-check-input" type="checkbox" name="newsletter" id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="newsletter">Join our newsletter</label>
             </div>
