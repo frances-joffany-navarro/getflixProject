@@ -23,7 +23,6 @@ h3 {
 .comment-list {
   border: none;
   padding: 0;
-  
 }
 
 .comment-date {
@@ -38,4 +37,40 @@ h3 {
 
 .ul-comments {
   max-width: 80%;
+}
+
+@media screen and (max-width: 1196px) {
+  .container {
+    margin-top: 15%;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .container {
+    margin-top: 20%;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .container {
+    margin-top: 20%;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .container {
+    margin-top: 25%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .container {
+    margin-top: 30%;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .container {
+    margin-top: 30%;
+  }
 }
