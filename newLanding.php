@@ -30,7 +30,7 @@ $user = $_SESSION['user'];
   <body>
   <?php include 'navbar.php';?>    
     <div class="container text-center mt-5 pt-5">
-      <img class="img-fluid mb-3" src="images/avatar-profilPhp.jpg" alt="profile">
+      <img class="img-fluid mb-3" src="images/avatar-profilPhp.jpg" alt="profile" width=150px>
       <div class="col-12">
         <div class="text-center">
           <h1><?php echo "$user->firstName $user->lastName"; ?></h1>
