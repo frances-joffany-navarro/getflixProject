@@ -24,9 +24,9 @@
                         <p class="fw-lighter">Tokens are invalid. Please re-submit your request again.</p>
                         </div>
                     <?php }elseif ($_GET['status'] == "failed"){ ?>
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-danger " role="alert">
                         <h6>Email cannot be send.</h6>
-                        <p class="fw-lighter"><?php $_GET['message']?></p>
+                        <p class="fw-lighter text-wrap" style="width: 15rem;"><?php echo $_GET['message']?></p>
                         </div>
                     <?php }elseif ($_GET['status'] == "notrecognized"){ ?>
                         <div class="alert alert-danger" role="alert">
