@@ -19,6 +19,9 @@ div {
 a {
   color: #79b8f3;
 }
+ul{
+  list-style: none;
+}
 /*--------------------------------------------------------Navigation Bar --------------------------------*/
 .topnav {
   background-color: rgb(22, 39, 39);
@@ -83,6 +86,7 @@ body {
 footer {
   margin-top: auto;
 }
+
 
 @media only screen and (min-width: 680px) {
   #accountButton {
