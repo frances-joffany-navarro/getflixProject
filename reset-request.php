@@ -83,7 +83,8 @@ if (isset($_POST['reset-request-submit'])) {
                 $message = "<p>We received a password reset request. The link to reset your password is below. This link will only be available for <b>1 hour</b>. <i>If you did not make this request, you can ignore this email.</i></p>";
                 $message .= "<p>Here is your password reset link: </br>";
                 $message .= "<a href='" . $url . "'>" . $url . "</a></p>";
-
+                //End email information
+                
                 require_once "PHPMailer/PHPMailer.php";
                 require_once "PHPMailer/SMTP.php";
                 require_once "PHPMailer/Exception.php";

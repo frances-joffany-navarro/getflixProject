@@ -9,7 +9,6 @@
             <title>Reset Password</title>
         </head>
         <body>
-        
         <div class="login-form">    
         <?php
           $selector = $_GET['selector'];
@@ -68,13 +67,11 @@
                 </div>                
               </form>
               <!-- End of create new password form -->
-              <?php 
-            }else{
+      <?php }else{
               echo "Tokens are invalid.";
             }
-          }
-          ?>
+          } ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-        </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    </body>
 </html>
