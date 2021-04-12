@@ -30,7 +30,7 @@ $user = $_SESSION['user'];
   </head>
   <body>
   <?php include 'navbar.php';?>    
-    <div class="container text-center mt-5 pt-5">
+    <div class="container text-center mt-5 pt-5 mb-5">
       <img class="img-fluid mb-3" src="images/avatar-profilPhp.jpg" alt="profile" width=150px>
       <div class="col-12">
         <div class="text-center">
@@ -41,3 +41,4 @@ $user = $_SESSION['user'];
     </div>  
   </body>
 </html>
+<?php include 'footer.php';?>

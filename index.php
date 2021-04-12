@@ -22,7 +22,7 @@ session_start();
 
 <body>
     <?php include 'navbar.php';?>
-    <main>
+    <main class="mb-3">
 
         <ul id="myTable">
             <?php  
