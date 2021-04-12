@@ -34,25 +34,27 @@
   margin-left: 450px;
 }
 
+@media screen and (min-width: 1197px) {
+  .image {
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 360px;
+  }
+  .logout {
+    margin-left: 1070px;
+    width: 90px;
+    height: 50px;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+  }
 
-/* @media screen and (max-width: 680px){
-    .image{
-        width: 200px;
-        height: 200px;
-        margin-top:20px ;
-        margin-left: 150px;
-    }
-    .logout{
-        margin-left: 400px;
-        width: 90px;
-        height: 50px;
-        font-size: 20px;
-        border: 2px solid black;
-        padding: 10px;
-        text-align: center;
-    }
-
-} */
+  .container {
+    margin-top: 10%;
+  }
+}
 
 @media screen and (max-width: 1196px) {
   .image {
