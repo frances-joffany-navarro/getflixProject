@@ -51,7 +51,12 @@ main {
 .navbar {
   background-color: rgb(22, 39, 39);
 }
-
+.navbar-toggler {
+    background-color:rgb(35, 65, 65) ;
+  }
+.navbar-toggler-icon {
+    background-color: rgb(43, 78, 78);
+  }
 /*----------------------------------------------------Footer---------------------------------*/
 #bottomLogo {
   color: whitesmoke;
