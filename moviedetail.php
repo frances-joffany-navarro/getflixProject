@@ -136,13 +136,18 @@ include 'navbar.php';
             JOIN permissions as permissions ON rolePermissions.permission_id = permissions.id
             WHERE user_id=$user->id");
 
+            //take first column from row
             $userPermissions = $responsePermissions->fetchAll(PDO::FETCH_COLUMN, 0);
 
+            //define user permissions
             $canUserAddComment = in_array(Permissions::ADD_COMMENT, $userPermissions);
 
             $canUserDeleteComment = in_array(Permissions::DELETE_COMMENT, $userPermissions);
 
-            if ($canUserAddComment) { ?>
+            //verify if user has permission to add comments
+            if ($canUserAddComment) {
+                //then display form
+        ?>
                 <form action="" method="post" class="mt-4">
                     <textarea id="comment" name="comment" rows="3" cols="40" placeholder="Write a comment" required></textarea>
                     <input class="mt-4 d-block btn btn-outline-success" id="postButton" type="submit" value="Post">
@@ -164,9 +169,12 @@ include 'navbar.php';
         WHERE comments.film_id=$movieId
         ORDER BY created_at DESC LIMIT 0, 10");
 
+        //verify row is not empty
         $hasComments = $responseComments->rowCount() > 0;
 
-        if ($hasComments) { ?>
+        if ($hasComments) {
+            //then add the comments on the page
+        ?>
 
             <ul class="list-group ul-comments mt-4 px-4 mx-auto">
 
@@ -179,10 +187,13 @@ include 'navbar.php';
                 </li>
 
                 <?php
+                //fetch data from DB
                 while ($data = $responseComments->fetch()) {
                     $comment = $data['comment'];
+                    //retrieve date in desired format
                     $createdDate = date_create($data['created_at']);
                     $date = date_format($createdDate, 'jS F Y');
+
                     $firstName = $data['first_name'];
                     $commentId = $data['comment_id'];
                     $commentUserId = $data['user_id'];
@@ -193,10 +204,12 @@ include 'navbar.php';
                         <i class="comment-date"> * <?php echo $date ?></i>
 
                         <?php
+                        //verify user has permission to delete comments
                         $isOwnComment = $isUserLogged && $commentUserId == $user->id;
                         $canDeleteComment = $isUserLogged && ($canUserDeleteComment || $isOwnComment);
 
                         if ($canDeleteComment) {
+                            //if so, display delete button
                         ?>
                             <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
                                 <i class='fa fa-trash fs-6 delete-icon'></i>
@@ -204,7 +217,6 @@ include 'navbar.php';
                         <?php
                         }
                         ?>
-
                     </li>
 
                     <li class="list-group-item comment-list fs-6 mb-3">
@@ -218,7 +230,6 @@ include 'navbar.php';
             </ul>
         <?php } ?>
     </div>
-
     <?php include 'footer.php'; ?>
 </body>
 
