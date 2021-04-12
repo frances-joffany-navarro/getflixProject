@@ -5,6 +5,7 @@ include './user.php';
 include './permissions.php';
 session_start();
 
+//verify user is logged
 $isUserLogged = isset($_SESSION['user']);
 $user = $isUserLogged ? $_SESSION['user'] : null;
 
@@ -14,6 +15,7 @@ if (!isset($_GET['movieId']) || !is_numeric($_GET['movieId'])) {
     return;
 }
 
+//declare variable with the id of the movie from link
 $movieId = $_GET['movieId'];
 
 // Delete row from comments
@@ -39,18 +41,23 @@ JOIN film_category as filmcategory ON film.film_id = filmcategory.film_id
 JOIN category as category ON filmcategory.category_id = category.category_id
 LEFT JOIN videos as videos ON film.trailer_id = videos.id
 WHERE film.film_id = $movieId");
-    // get row
+
+    //verify if movie is not found
     if ($responseMovies == false) {
         echo "<p><strong>MOVIE NOT FOUND</strong></p>";
         return;
     }
+
+    // get row
     $data = $responseMovies->fetch();
+
+    //verify if movie is not found
     if ($data == false) {
         echo "<p><strong>MOVIE NOT FOUND</strong></p>";
         return;
     }
 
-    // get data
+    // store data into vars
     $yearReleased = $data['year_released'];
     $categoryName = $data['category_name'];
     $description = $data['description'];
@@ -63,10 +70,15 @@ WHERE film.film_id = $movieId");
 }
 
 //MESSAGES
+
+//verify comment was added
 $isCommentAdded = isset($_POST['comment']);
+
 if ($isCommentAdded) {
-    // INSERT DATA IN DB
+
     $comment = $_POST['comment'];
+
+    // INSERT DATA IN DB
     $insertSql = "INSERT INTO comments (`comment`, `user_id`, `film_id` ) VALUES('$comment', $user->id, $movieId)";
 
     try {
@@ -86,10 +98,9 @@ include 'navbar.php';
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name=description content="Display the details of a selected movie">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie details</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="./css/moviedetail.css">
 </head>
 
@@ -117,6 +128,7 @@ include 'navbar.php';
         </div>
 
         <?php
+        //verify if user is logged
         if ($isUserLogged) {
             $responsePermissions = $dbConnection->query("SELECT permissions.description
             FROM user_roles as userRoles 
@@ -208,9 +220,6 @@ include 'navbar.php';
     </div>
 
     <?php include 'footer.php'; ?>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script> -->
 </body>
 
 </html>
