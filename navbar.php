@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
 
-<header>
+<header class="mb-5">
   <nav class="navbar navbar-expand-lg fixed-top mb-3">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php"><img src="images/logoGetFlix.png" alt="GetFlix Logo"></a>
