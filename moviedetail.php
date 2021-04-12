@@ -94,7 +94,7 @@ include 'navbar.php';
 </head>
 
 <body>
-    <div class="container mt-4 text-start">
+    <div class="container text-start">
         <!-- Display movie -->
         <div class="row mb-4" ;>
             <div class="col-12 col-sm-6">
@@ -169,7 +169,8 @@ include 'navbar.php';
                 <?php
                 while ($data = $responseComments->fetch()) {
                     $comment = $data['comment'];
-                    $createdDate = $data['created_at'];
+                    $createdDate = date_create($data['created_at']);
+                    $date = date_format($createdDate, 'jS F Y');
                     $firstName = $data['first_name'];
                     $commentId = $data['comment_id'];
                     $commentUserId = $data['user_id'];
@@ -177,7 +178,7 @@ include 'navbar.php';
                 ?>
                     <li class="list-group-item comment-list comment-name">
                         <b><?php echo $firstName ?> </b>commented
-                        <i class="comment-date"> * <?php echo $createdDate ?></i>
+                        <i class="comment-date"> * <?php echo $date ?></i>
 
                         <?php
                         $isOwnComment = $isUserLogged && $commentUserId == $user->id;
@@ -186,7 +187,7 @@ include 'navbar.php';
                         if ($canDeleteComment) {
                         ?>
                             <a href="moviedetail.php?movieId=<?php echo $movieId ?>&commentId=<?php echo $commentId ?>">
-                                <i class='fa fa-trash delete-icon'></i>
+                                <i class='fa fa-trash fs-6 delete-icon'></i>
                             </a>
                         <?php
                         }
@@ -194,7 +195,7 @@ include 'navbar.php';
 
                     </li>
 
-                    <li class="list-group-item comment-list fs-5 mb-3">
+                    <li class="list-group-item comment-list fs-6 mb-3">
                         <?php echo $comment ?>
                         <hr>
                     </li>
