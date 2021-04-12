@@ -32,7 +32,7 @@
         </ul>
         <form class="d-flex my-2 " id="searchBar">
           <input class="form-control me-2" type="search" autocomplete="on" name="search" id="myInput" value="<?php echo !empty($_GET['search']) ? $_GET['search'] : NULL; ?>" placeholder="Search title/category" aria-label="Recipient's username">
-          <button class="btn btn-outline-success me-2" type="button" name="search" id="button-addon2">Search</button>
+          <button class="btn btn-outline-success me-md-2" type="button" name="search" id="button-addon2">Search</button>
         </form>
         <!-- Start of Linking of pages -->
         <ul class="navbar-nav mb-lg-0">
@@ -46,12 +46,11 @@
             $user = $_SESSION['user'];
           ?>
             <li class="nav-item">
-              <div class="btn-group">
-                <button type="button" class="btn btn-success"><?php echo "$user->firstName $user->lastName"; ?></button>
-                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                  <span class="visually-hidden">Toggle Dropdown</span>
+              <div class="d-grid dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?php echo "$user->firstName $user->lastName"; ?>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><a class="dropdown-item" href="newLanding.php">Profile</a></li>
                   <li>
                     <hr class="dropdown-divider">
