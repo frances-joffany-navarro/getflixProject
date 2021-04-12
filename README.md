@@ -1,6 +1,6 @@
 # Getflix Project
 This group project is a **Streaming Site** inspired by *Amazon Prime Video* and *Netflix*. The goal is to **display a catalog of movies**.
-The objective of this project is to let the group practice what they've learned about Backend *(PHP / SQL Database)* during the pass few days. This is a **10 days project** and it starts ***March 29*** until ***April 12, 2021***.
+The objective of this project is to let the group practice what they've learned about Backend *(PHP)* during the pass few days. This is a **10 days project** and it starts ***March 29*** until ***April 13, 2021***.
 
 ## Website - coming soon
 
@@ -9,10 +9,9 @@ The objective of this project is to let the group practice what they've learned 
 
 ## Language Used
 - HTML5
-- CSS3 and Bootstrap 4
+- CSS3 and Bootstrap 5 / Grid CSS
 - Javascript
 - PHP
-- SQL
 
 ## Prototype
 [https://www.figma.com/proto/jNtUTjTA6k9PBolBH78XYj/Getflix?node-id=23%3A4&scaling=scale-down&page-id=0%3A1](https://www.figma.com/proto/jNtUTjTA6k9PBolBH78XYj/Getflix?node-id=23%3A4&scaling=scale-down&page-id=0%3A1)
@@ -35,9 +34,12 @@ The objective of this project is to let the group practice what they've learned 
 #### **Images**
 
 #### **Icons**
+- [Font Awesome](https://fontawesome.com/) 
 
 #### **Fonts**
 
 #### **Tools**
-  - [Figma](https://www.figma.com/) for the Prototype
-  - [MySQL Workbench](https://www.mysql.com/products/workbench/) for the Database Diagram
+- [Figma](https://www.figma.com/) for the Prototype
+- [MySQL Workbench](https://www.mysql.com/products/workbench/) for the Database Diagram
+- [Trello](https://trello.com/) for group task management
+- [InfinityFree](https://infinityfree.net/) used in deploying our project
