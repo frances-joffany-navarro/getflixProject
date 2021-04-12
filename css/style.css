@@ -44,9 +44,6 @@ a {
   overflow-y: scroll;
   height: 20rem;
 }
-main {
-  margin-top: 10%;
-}
 
 .navbar {
   background-color: rgb(22, 39, 39);
@@ -84,6 +81,18 @@ footer {
   margin-top: auto;
 }
 
+@media only screen and (min-width: 280px) {
+  main {
+    margin-top: 30%;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  main {
+    margin-top: 30%;
+  }
+}
+
 @media only screen and (min-width: 680px) {
   #accountButton {
     float: right;
@@ -92,10 +101,18 @@ footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
+  main {
+    margin-top: 20%;
+  }
 }
+
 @media only screen and (min-width: 1000px) {
   ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  main {
+    margin-top: 10%;
   }
 }
