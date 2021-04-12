@@ -26,7 +26,7 @@
                     <?php }elseif ($_GET['status'] == "failed"){ ?>
                         <div class="alert alert-danger" role="alert">
                         <h6>Email cannot be send.</h6>
-                        <p class="fw-lighter"><?php $_GET['error']?></p>
+                        <p class="fw-lighter"><?php $_GET['message']?></p>
                         </div>
                     <?php }elseif ($_GET['status'] == "notrecognized"){ ?>
                         <div class="alert alert-danger" role="alert">
