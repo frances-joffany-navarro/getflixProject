@@ -43,15 +43,7 @@ The objective of this project is to let the group practice what they've learned 
 
 ## **Lighthouse Evaluation**
 
-## **Credits**
-#### Website Inspiration
-- [Prime Video](https://www.primevideo.com/)
-- [Netflix](https://www.netflix.com/be-en/)
-  
-#### Images
-
-
-#### Tools
+## **Tools**
 - [Figma](https://www.figma.com/) for the Prototype
 - [MySQL Workbench](https://www.mysql.com/products/workbench/) for the Database Diagram
 - [Trello](https://trello.com/) for group task management
