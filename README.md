@@ -2,7 +2,8 @@
 This group project is a **Streaming Site** inspired by [Amazon Prime Video](https://www.primevideo.com/) and [Netflix](https://www.netflix.com/be-en/). The goal is to **display a catalog of movies**.
 The objective of this project is to let the group practice what they've learned about Backend *(PHP)* during the pass few days. This is a **10 days project** and it starts ***March 29*** until ***April 13, 2021***.
 
-## **Website - coming soon**
+## **Website**
+[http://getflix.rf.gd/](http://getflix.rf.gd/)
 
 ## **Instruction link**
 [https://github.com/becodeorg/BXL-Swartz-4-27/blob/master/2.The-Hill/2.PHP/GetflixProject.md](https://github.com/becodeorg/BXL-Swartz-4-27/blob/master/2.The-Hill/2.PHP/GetflixProject.md)
