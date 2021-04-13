@@ -43,6 +43,11 @@ The objective of this project is to let the group practice what they've learned 
 - [Mehmet Ugurlu](https://github.com/mugurlu0)
 
 ## **Lighthouse Evaluation**
+- ### In Localhost
+  ![Localhost](documentation/localhost.png)
+
+- ### In Webhost
+  ![Webhost](documentation/website.jpg)
 
 ## **Tools**
 - [Figma](https://www.figma.com/) for the Prototype
